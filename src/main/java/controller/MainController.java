@@ -8,19 +8,11 @@ import service.MainService;
 
 @RestController
 public class MainController {
-	
-	@Autowired
-	MainService service;
-	
+  @Autowired
+  MainService service;
 
-	public MainController() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	@GetMapping("/api")
-	public String apiCall() {
-		return service.apiService();
-	}
-	
-
+  @GetMapping("/api")
+  public String apiCall() {
+    return service.apiService();
+  }
 }
