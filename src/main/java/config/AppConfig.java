@@ -1,27 +1,17 @@
 package config;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
-
+import service.MainService;
 
 @Configuration
-@ComponentScan(basePackages= {"aspect","controller","service"})
-@EnableWebMvc
-public class AppConfig extends WebMvcConfigurationSupport {
-
-	public AppConfig() {
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public RequestMappingHandlerMapping createRequestMappingHandlerMapping() {
-		RequestMappingHandlerMapping requestMappingHandlerMapping = super.createRequestMappingHandlerMapping();
-		requestMappingHandlerMapping.setUseSuffixPatternMatch(false);
-		requestMappingHandlerMapping.setUseTrailingSlashMatch(false);
-		return requestMappingHandlerMapping;
-	}
-
+@ComponentScan(basePackages = { "aop", "controller", "service" })
+public class AppConfig {
+  public static void main(String[] args) {
+    try (AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class)) {
+      MainService mainService = appContext.getBean(MainService.class);
+      System.out.println(mainService.apiService());
+    }
+  }
 }
